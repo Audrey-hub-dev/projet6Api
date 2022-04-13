@@ -15,14 +15,6 @@ const app = express();
 const helmet = require('helmet');
 app.use(helmet());
 
-app.use(helmet.hidePoweredBy());
-app.use(helmet.contentSecurityPolicy());
-app.use(helmet.hsts());
-app.use(helmet.ieNoOpen());
-app.use(helmet.noSniff());
-app.use(helmet.frameguard());
-app.use(helmet.xssFilter()); 
-
 
 //utilisation de cookie-session pour sécuriser les cookies de session 
 const cookieSession = require('cookie-session');
@@ -80,8 +72,6 @@ app.use((req, res, next) => {
   Domain=127.0.0.1; HttpOnly; Secure; Max-Age = 3600"]); 
   //pour permettre l'affichage des images avec Helmet 
   res.setHeader('Cross-Origin-Resource-Policy', "cross-origin"); 
-  //filtrage activé, le navigateur bloque le rendu de la page si une tentative d'ataque XSS est détectée
-  res.setHeader('X-XSS-Protection', "1; mode-block"); 
   next();
 });
 
