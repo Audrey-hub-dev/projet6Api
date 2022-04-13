@@ -111,7 +111,7 @@ exports.deleteSauce = (req, res, next) => {
             })
 
         })
-        .catch(error => res.status(500).json({error}));
+        .catch(error => res.status(400).json({error}));
 }; 
 
         
@@ -154,7 +154,7 @@ exports.likeDislikeSauce = (req, res, next ) => {
         
             }
             )
-            .then(() => res.status(201).json({ message: "like ajouté !" }))
+            .then(() => res.status(200).json({ message: "like ajouté !" }))
             .catch((error) => res.status(400).json({ error }));  
         };
 
@@ -169,7 +169,7 @@ exports.likeDislikeSauce = (req, res, next ) => {
                     $pull: { usersLiked: req.body.userId },//suppression avec pull
                 }
             )
-            .then(()=> res.status(201).json({message: 'like annulé !'}))
+            .then(()=> res.status(200).json({message: 'like annulé !'}))
             .catch((error) => res.status(400).json({ error }));
         };
 
@@ -183,7 +183,7 @@ exports.likeDislikeSauce = (req, res, next ) => {
         
                 }
             )
-            .then(() => res.status(201).json({ message: "dislike ajouté !" }))
+            .then(() => res.status(200).json({ message: "dislike ajouté !" }))
             .catch((error) => res.status(400).json({ error }));  
         };
 
@@ -197,7 +197,7 @@ exports.likeDislikeSauce = (req, res, next ) => {
                     $pull: { usersDisliked: req.body.userId },//suppression avec pull
                 }
             )
-            .then(()=> res.status(201).json({message: 'dislike annulé !'}))
+            .then(()=> res.status(200).json({message: 'dislike annulé !'}))
             .catch((error) => res.status(400).json({ error }));
         };
     })
