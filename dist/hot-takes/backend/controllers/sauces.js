@@ -123,7 +123,7 @@ exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         //promise
       .then(sauce => res.status(200).json(sauce))
-      .catch(error => res.status(404).json({ error }));
+      .catch(error => res.status(400).json({ error }));
 }; 
 
 //on exporte la logique de récupération de toutes les sauces 
