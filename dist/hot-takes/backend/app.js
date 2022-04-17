@@ -9,13 +9,6 @@ const express = require('express');
 const app = express();
 
 
-//utilisation du module 'helmet' pour la sécurité en protégeant l'application de certaines vulnérabilités
-// il sécurise nos requêtes HTTP, sécurise les en-têtes, contrôle la prélecture DNS du navigateur, empêche le détournement de clics
-// et ajoute une protection XSS mineure 
-const helmet = require('helmet');
-app.use(helmet());
-
-
 //utilisation de cookie-session pour sécuriser les cookies de session 
 const cookieSession = require('cookie-session');
 
@@ -70,8 +63,6 @@ app.use((req, res, next) => {
   //ajout sécurité httpOnly et secure pour les cookies
   res.setHeader('Set-Cookie', ["__Secure-cookie = cookie; Expires-Sat, 15 May 2022 20:00:00 GMT;\
   Domain=127.0.0.1; HttpOnly; Secure; Max-Age = 3600"]); 
-  //pour permettre l'affichage des images avec Helmet 
-  res.setHeader('Cross-Origin-Resource-Policy', "cross-origin"); 
   next();
 });
 
