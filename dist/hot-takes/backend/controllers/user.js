@@ -29,7 +29,7 @@ exports.signup = (req, res, next) => {
     de hachage; ici on fera 10 tours)*/)
         //récupération du hash du mots de passe 
         .then(hash => {
-            //on enregistre ce hash dans la base de donnéesen créant un 
+            //on enregistre ce hash dans la base de données en créant un 
             //nouvel utilisateur 
             const user = new User({
                 email: req.body.email, 
@@ -40,7 +40,7 @@ exports.signup = (req, res, next) => {
             user.save()
                 //état 201 pour création de ressources
                 .then(() => res.status(201).json({message: 'Utilisateur créé !'}))
-                .catch(error => res.status(400).json({error}));
+                .catch(error => res.status(400).json({error}));// erreur 400 pour la différencier de l'erreur 500
 
         })
         //erreur 500 du serveur
