@@ -1,7 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
-/dist
+/dist/hot-takes/backend/images
+/dist/hot-takes/backend/.env
+/dist/hot-takes/backend/node_modules
 /tmp
 /out-tsc
 /bazel-out
