@@ -144,7 +144,7 @@ exports.likeDislikeSauce = (req, res, next ) => {
         //like = 1 (like = +1 (l'utilisateur aime la sauce))
         //utilisation de la méthode includes(), des opérateurs $inc, $push, $pull
         //empêche l'utilisateur de même id de liker ou disliker plusieurs fois 
-        //le userId n'est pas dans la base de données (usersLiked) et aucun like
+        //le userId n'est pas dans la base de données (usersLiked) et like strictement égal à 1 
         if (!sauce.usersLiked.includes(req.body.userId) && req.body.like === 1) {
             Sauce.updateOne(
             { _id: req.params.id },
@@ -165,7 +165,7 @@ exports.likeDislikeSauce = (req, res, next ) => {
             Sauce.updateOne(
                 {_id: req.params.id},
                 {
-                    $inc: { likes: -1 },
+                    $inc: { likes: -1 },// le like repasse à 0
                     $pull: { usersLiked: req.body.userId },//suppression avec pull
                 }
             )
@@ -193,14 +193,15 @@ exports.likeDislikeSauce = (req, res, next ) => {
             Sauce.updateOne(
                 {_id: req.params.id},
                 {
-                    $inc: { dislikes: -1 },
+                    $inc: { dislikes: -1 }, //le dislike repasse à 0
                     $pull: { usersDisliked: req.body.userId },//suppression avec pull
                 }
             )
             .then(()=> res.status(200).json({message: 'dislike annulé !'}))
             .catch((error) => res.status(400).json({ error }));
         };
-    })
+        })
+        .catch((error) => res.status(404).json({error})); //sauce non trouvée 
 }; 
    
 
